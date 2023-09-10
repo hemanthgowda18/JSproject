@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Programs</title>
+    <link rel="stylesheet" href="./Numberpgm.css">
+    <style>
+        *{
+    padding: 0;
+    margin: 0;
+    box-sizing:border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#section {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#list {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#num {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#output {
+    margin-top: 30px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+    width: 800px;
+    height: 200px;
+    position: relative;
+    left: 370px;
+    font-family: monospace ;
+    font-size: x-large;
+    font-weight: bold;
+    
+}
+
+#btn1{
+            background-color: blue;
+            width: 100px;
+            height: 40px;
+            color: white;
+            border: transparent;
+            margin-top: 100px;
+            margin-left: 700px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Number Programs</h2>
+    <section id="section">
+        <article>
+            <label class="label"><h3>Please select a program from the list below</h3></label>
+            <select id="list" required>
+                <option value=""></option>
+                <option value="fibonacci">Fibonacci series</option>
+                <option value="factorial">Number factorial</option>
+                <option value="primenumber">Prime number</option>
+                <option value="palindrome">Palindrome number</option>
+                <option value="happynumber">Happy number</option>
+                <option value="reverse">Number reverse</option>
+                <option value="singledigit"> Sum till getting single digit</option>
+                <option value="count">count of number</option>
+                <option value="even">Even number sum</option>
+                <option value="odd">Odd number sum</option>
+                <option value="tables">Number tables</option>
+                <option value="armstrong">Armstrong number</option>
+                <option value="strong">Strong number</option>
+                <option value="perfect">Perfect number</option>
+                <option value="primefactor">Prime factor</option>
+                <option value="binary">Binary conversion</option>
+                <option value="factor">Factors</option>
+            </select>
+            <div></div>
+            <br>
+            <label for=""><h3>Please enter an integer number</h3></label>
+            <input id="num" type="number">
+            <div></div>
+            <br>
+            <button id="btn">Submit</button>
+        </article>
+    </section>
+    <div id="output"></div>
+    <button id="btn1" onclick="goBack()">Back</button>
+
+    <script>
+     document.getElementById("btn").addEventListener("click", function () {
+    var selectedProgram = document.getElementById("list").value;
+    var num = parseInt(document.getElementById("num").value);
+    var outputDiv = document.getElementById("output");
+    var answer = "";
+
+    if (selectedProgram === "fibonacci") {
+        answer = generateFibonacciSeries(num);
+    } else if (selectedProgram === "factorial") {
+        answer = calculateFactorial(num);
+    } else if (selectedProgram === "primenumber") {
+        answer = isPrimeNumber(num);
+    } else if (selectedProgram === "palindrome") {
+        answer = isPalindrome(num);
+    } else if (selectedProgram === "happynumber") {
+        answer = isHappyNumber(num);
+    } else if (selectedProgram === "reverse") {
+        answer = reverseNumber(num);
+    } else if (selectedProgram === "singledigit") {
+        answer = sumTillSingleDigit(num);
+    } else if (selectedProgram === "count") {
+        answer = countDigits(num);
+    } else if (selectedProgram === "even") {
+        answer = isEven(num);
+    } else if (selectedProgram === "odd") {
+        answer = isOdd(num);
+    }
+     else if (selectedProgram === "tables") {
+        answer = generateNumberTables(num);
+    } else if (selectedProgram === "armstrong") {
+        answer = isArmstrongNumber(num);
+    } else if (selectedProgram === "strong") {
+        answer = isStrongNumber(num);
+    } else if (selectedProgram === "perfect") {
+        answer = isPerfectNumber(num);
+    } else if (selectedProgram === "primefactor") {
+        answer = findPrimeFactors(num);
+    } else if (selectedProgram === "binary") {
+        answer = decimalToBinary(num);
+    } else if (selectedProgram === "factor") {
+        answer = findFactors(num);
+    }
+
+    outputDiv.innerHTML = "<p>" + answer + "</p>";
+
+
+            var ans=answer.toString();
+            var inp =new SpeechSynthesisUtterance(ans);
+            window.speechSynthesis.speak(inp);
+});
+
+function generateFibonacciSeries(n) {
+    var fibSeries = [0, 1];
+    for (var i = 2; i < n; i++) {
+        fibSeries.push(fibSeries[i - 1] + fibSeries[i - 2]);
+    }
+    return fibSeries.join(" , " );
+}
+
+function calculateFactorial(n) {
+    var fact =1;
+    for(var i=n; i>=1; i--){
+        fact = fact * i
+    }
+    return `Factorial of entered number is ${fact}`;
+}
+
+function isPrimeNumber(n) {
+    var flag = true;
+    for(let i=2; i<n; i++){
+        if(n%i==0){
+            flag = false;
+            break;
+        }
+    }
+    if(flag==true){
+        return ("Entered number is prime number");
+    }else{
+        return ("Entered number is not prime number");
+    }
+}
+
+function isPalindrome(no) {
+    var copy=no;
+    var r = 0;
+    while(no!=0){
+        var rem = no%10;
+        r = (r*10)+rem;
+        no=parseInt(no/10);
+    }
+    console.log(r);  
+    if(copy==r){
+        return ("Entered number is palindrome");
+    }else{
+        return ("Entered number is not a palindrome");
+    }
+}
+
+function isHappyNumber(no) {
+    while(no>9){
+        no=num(no)
+    }
+    if(no==1 || no==7){
+        return ("Entered number is happy number");
+    }else{
+        return ("Entered number is not a happy number");
+    }
+    function num(no){
+        var sum = 0;
+        while(no!=0){
+        var rem = no%10;
+        sum = sum + rem;
+        no=parseInt(no/10);
+        
+    }
+    return sum;
+    }   
+}
+
+function reverseNumber(no) {
+    var r = 0;
+    while(no!=0){
+        var rem = no%10;
+        r = (r*10) + rem;
+        no = parseInt(no/10);
+    }
+    return ("The reverse of entered number is " +r);
+}
+
+function sumTillSingleDigit(no) {
+    var no = 119;
+    while(no>9){
+        no = num(no);
+    }
+    return("The sum till getting single digit of entered number is "+no);
+    function num(no){
+        var sum = 0;
+        while(no!=0){
+            var rem = no%10;
+            sum = sum+rem;
+            no=parseInt(no/10);
+        }
+        return sum;
+    }
+}
+
+function countDigits(no) {
+    var count = 0;
+    while(no!=0){
+        no=parseInt(no/10);
+        count++
+    }
+    return("The count of entered number is "+count);
+}
+
+function isEven(no) {
+    var sum = 0;
+    for(var i = 1; i<=no; i++){
+        if(i%2==0){
+            sum = sum + i;
+        }
+    }
+    return ("The even sum of entered number is "+sum);
+}
+
+function isOdd(no) {
+    var sum = 0;
+    for(var i = 1; i<=no; i++){
+        if(i%2!=0){
+            sum = sum + i
+        }
+    }
+    return ("The even sum of entered number is "+sum);
+}
+
+function generateNumberTables(n) {
+    var tables = "";
+    for (var i = 1; i <= 10; i++) {
+        tables += n + " x " + i + " = " + (n * i) + "<br>";
+    }
+    return tables;
+}
+
+function isArmstrongNumber(no) {
+    var no1=no;
+    var copy=no;
+    var sum = 0;
+    var count = 0;
+    while(no1!=0){
+        no1=parseInt(no1/10);
+        count++;
+    }
+    while(no!=0){
+        var rem = no%10;
+        sum = sum + Math.pow(rem,count);
+        // sum +=Math.pow(rem,count);
+        no=parseInt(no/10);
+    }
+    if(sum==copy){
+        return (`${copy} is Amrstrong number`);
+    }else{
+        return (`${copy} is not a Amrstrong number`);
+    }
+}
+
+function isStrongNumber(no) {
+    var copy=no;
+    var sum=0;
+    while(no!=0){
+        var rem = no%10;
+        var fact = 1;
+        for(var i=rem; i>=1; i--){
+            fact = fact *i;
+        }
+        sum = sum + fact;
+        no=parseInt(no/10);
+    }
+    if(copy==sum){
+        return (`${copy} is strong number`);
+    }else{
+        return (`${copy} is not a strong number`);
+    }
+}
+
+function isPerfectNumber(no) {
+    var copy=no;
+    var sum = 0;
+    for(var i=1; i<=no/2; i++){
+        if(no%i==0){
+            sum = sum+i;
+        }
+    }
+    if(no==sum){
+        return (`${copy} is perfect number`);
+    }else{
+        return (`${copy} is not a perfect number`);
+    }
+}
+
+function findPrimeFactors(no) {
+    var primeFactors = [];
+    for (var j = 2; j <= no / 2; j++) {
+        if (no % j === 0) {
+            if (isPrimeNumber(j)) {
+                primeFactors.push(j);
+            }
+        }
+    }
+
+    if (primeFactors.length > 0) {
+        return "Prime factors: " + primeFactors.join(", ");
+    } else {
+        return "No prime factors found.";
+    }
+}
+
+
+function decimalToBinary(no) {
+    var str="";
+    while(no!=0){
+        var rem = no%2;
+        str = rem+str;
+        no=parseInt(no/2);
+    }
+    return ("The Binary digit of entered number is "+str);
+}
+
+function findFactors(n) {
+    var factors = "";
+    for (var i = 1; i <= n; i++) {
+        if (n % i === 0) {
+            factors += i + " ";
+        }
+    }
+    return ("The factors of entered number is "+factors);
+}
+    </script>
+    <script>
+        let btn=document.querySelector("btn");
+         function goBack(){
+            history.back();
+         }
+    </script>
+</body>
+</html>

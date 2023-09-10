@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Password Change Form</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: powderblue;
+        border-radius: 20px;
+        box-shadow: greenyellow;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-image: linear-gradient(aqua, white)
+    }
+
+    .container {
+        /* background-image: radial-gradient(red, white/); */
+        background-color: whitesmoke;
+        padding: 20px;
+        border-radius: 5px;
+        /* box-shadow: 0 2px 4px rgba(10, 10, 10, 0.1); */
+        width: 400px;
+        box-shadow: fuchsia;
+    }
+
+    label,
+    input {
+        display: block;
+        margin-bottom: 10px;
+        /* width: 100px; */
+        height: 40px;
+        color: blueviolet;
+    }
+
+    input {
+        width: 400px;
+        border-radius: 5px;
+        height: 30px;
+
+    }
+
+    button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    #errorText {
+        color: red;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    label {
+        margin: 0px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1>Password Change Form</h1>
+        <form id="passwordForm">
+
+            <label for="oldPassword">Old Password:</label>
+            <input type="password" id="oldPassword" name="oldPassword" required>
+
+
+            <label for="newPassword">New Password:</label>
+            <input type="password" id="newPassword" name="newPassword" required>
+
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+            <button type="submit">Change Password</button>
+            <button>close</button>
+            <p id="errorText"></p>
+        </form>
+    </div>
+    <script>
+        document.getElementById("passwordForm").addEventListener("submit", function (event) {
+            var oldPassword = document.getElementById("oldPassword").value;
+            var newPassword = document.getElementById("newPassword").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+            var errorText = document.getElementById("errorText");
+
+            if (newPassword !== confirmPassword) {
+                event.preventDefault();
+                errorText.textContent = "New password and confirm password do not match.";
+            } else if (oldPassword === newPassword) {
+                event.preventDefault();
+                errorText.textContent = "New password must be different from old password.";
+            } else {
+                errorText.textContent = "";
+            }
+
+            let isValid=true;
+
+            if (isValid) {
+                    const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+                    const matchedUser = storedUsers.find(user =>user.password === oldPassword);
+
+                    if (matchedUser) {
+                        localStorage.setItem("users", JSON.stringify(users.password=newPassword));
+                        alert("password updated")
+                    } 
+                } else {
+                    event.preventDefault();
+                }
+        });
+
+    </script>
+</body>
+
+</html>

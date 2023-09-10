@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .img1{
+    width: 1510px;
+    height: 500px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+
+}
+
+.hello{
+    display: flex;
+    align-items: center;
+    background-color: rgb(15,6,23);
+    height: 500px;
+}
+#prev{
+    background-color: transparent;
+    border-color: transparent;
+}
+
+#next{
+    
+    background-color: transparent;
+    border-color: transparent;
+}
+
+aside{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.g1{
+    position: absolute;
+    left: 100px;
+    z-index: 1;
+}
+
+.g2{
+    position: relative;
+}
+
+.g3{
+    position: absolute;
+    left:1400px ;
+}
+
+
+.g4{
+    position: absolute;
+    left: 700px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 425px;
+    width: 150px;
+    
+}
+
+.q1{
+    background-color: rgb(174, 179, 174);
+    width:30px ;
+    height: 3px;
+}
+.q2{
+    background-color:rgb(174, 179, 174);
+    width:30px ;
+    height: 3px;
+}
+.q3{
+    background-color: rgb(174, 179, 174);
+    width:30px ;
+    height: 3px;
+}
+.q4{
+    background-color:rgb(174, 179, 174);
+    width:30px ;
+    height: 3px;
+}
+
+.fa-solid{
+    color: greenyellow;
+    transform: scale(2.5,2.5);
+}
+
+
+/* Your existing CSS styles */
+
+.q1, .q2, .q3, .q4 {
+    background-color: rgb(174, 179, 174); /* Default color for all horizontal lines */
+}
+
+.active {
+    background-color: greenyellow; /* Color for active horizontal lines */
+}
+
+
+
+    </style>
+</head>
+<body>
+    <div class="hello">
+    <div class="g1"><button id="prev"><i class="fa-solid fa-chevron-left" ></i></button></div>
+    <div class="g2"><img src="./dog-4671215_1920.jpg" alt="" style="height: 400px;" class="img1"></div>
+    <div class="g3"><button id="next"><i class="fa-solid fa-chevron-right"></i></button></div>
+    <div class="g4">
+        <div class="q1 q active"></div>
+        <div class="q2 q"></div>
+        <div class="q3 q"></div>
+        <div class="q4 q"></div>
+    </div>
+    </div>
+    <!-- <aside>
+    <h2 id="h11">NAME</h2>
+    <h2 id="h22">color</h2>
+    <h2 id="h33">WEIGHT6</h2>
+    </aside> -->
+    <script>
+        var arr=[{
+        name: "dog",
+        color: "golden",
+        photo: "pets-3715733_1920.jpg",
+        weight: "40kg"
+
+    },
+    {
+         name:"elephant",
+         color:"grey",
+         photo:"https://cdn.pixabay.com/photo/2016/11/14/04/45/elephant-1822636_1280.jpg",
+         weight: "5000kg"
+    },
+    {
+        name:"deer",
+        color:"golden sun",
+        photo:"https://cdn.pixabay.com/photo/2015/10/12/15/46/animal-984573_1280.jpg",
+        weight:"70kg"
+        
+    },
+    {
+        name:"tiger",
+        color:"red",
+        photo:"https://cdn.pixabay.com/photo/2017/07/24/19/57/tiger-2535888_640.jpg",
+        weight:"190kg"
+    }
+    
+]
+
+
+var img=document.querySelector("img");
+var h11=document.querySelector("#h11");
+var h22=document.querySelector("#h22");
+var h33=document.querySelector("#h33");
+// var q1=document.getElementsByClassName("q1");
+// var q2=document.getElementsByClassName("q2");
+// var q3=document.getElementsByClassName("q3");
+// var q4=document.getElementsByClassName("q4");
+
+let q = document.querySelectorAll(".q")
+// console.log(q);
+
+var prev=document.querySelector("#prev");
+var next=document.querySelector("#next");
+var a=0;
+
+prev.addEventListener("click",()=>{
+    // console.log(a);
+    img.src=`${arr[a].photo}`
+    // h11.innerHTML=`${arr[a].name}`
+    // h22.innerHTML=`${arr[a].color}`
+    // h33.innerHTML=`${arr[a].weight}`
+    if(a===0){
+        a=3;
+    }else{
+        
+        a--;
+    }
+})
+
+next.addEventListener("click",()=>{
+    // console.log(a);
+    img.src=`${arr[a].photo}`
+    // h11.innerHTML=`${arr[a].name}`
+    // h22.innerHTML=`${arr[a].color}`
+    // h33.innerHTML=`${arr[a].weight}`
+    a === 3 ? a = 0 : a++;
+    // if(a===3){
+    //     a = 0;
+    // }else {
+    //     a++;
+    // }
+})
+
+// ... (your existing code)
+
+var intervalId; // Declare a variable to store the interval ID
+
+// Function to display the animal information and image
+function displayAnimal() {
+    img.src = arr[a].photo;
+    // h11.innerHTML = arr[a].name;
+    // h22.innerHTML = arr[a].color;
+    // h33.innerHTML = arr[a].weight;
+ 
+}
+
+// Function to switch to the next animal
+function nextAnimal() {
+
+    a = (a + 1) % arr.length;
+    displayAnimal();
+}
+
+// Function to switch to the previous animal
+function prevAnimal() {
+    a = (a - 1 + arr.length) % arr.length;
+    displayAnimal();
+}
+
+// Event listeners for the previous and next buttons
+prev.addEventListener("click", prevAnimal);
+next.addEventListener("click", nextAnimal);
+
+// Function to start the automatic sliding at a specific interval
+function startSlider() {
+    intervalId = setInterval(nextAnimal, 3000); // 5000 milliseconds (5 seconds) interval
+}
+
+// Function to stop the automatic sliding
+function stopSlider() {
+    clearInterval(intervalId);
+}
+
+// Call the startSlider function to begin automatic sliding
+startSlider();
+
+// Pause the slider when the mouse is over the container
+document.querySelector(".hello").addEventListener("mouseover", stopSlider);
+
+// Resume the slider when the mouse leaves the container
+document.querySelector(".hello").addEventListener("mouseout", startSlider);
+
+
+
+// ... (your existing code)
+
+// Function to display the animal information and image
+function displayAnimal() {
+    img.src = arr[a].photo;
+    // h11.innerHTML = arr[a].name;
+    // h22.innerHTML = arr[a].color;
+    // h33.innerHTML = arr[a].weight;
+    q[a].classList.add("active")
+    // // Reset all the horizontal lines to their default color
+    // for (let i = 0; i < q1.length; i++) {
+    //     q1[i].classList.remove("active");
+    // }
+
+    // // Add the "active" class to all the horizontal lines up to the current slide
+    // for (let i = 0; i <= a; i++) {
+    //     q1[i].classList.add("active");
+    // }
+}
+
+// Function to switch to the next animal
+function nextAnimal() {
+    q[a].classList.remove("active")
+    // console.log(a);
+    a = (a + 1) % arr.length;
+    displayAnimal();
+}
+
+// Function to switch to the previous animal
+function prevAnimal() {
+    a = (a - 1 + arr.length) % arr.length;
+    displayAnimal();
+}
+
+// Event listeners for the previous and next buttons
+prev.addEventListener("click", prevAnimal);
+next.addEventListener("click", nextAnimal);
+
+// Function to start the automatic sliding at a specific interval
+function startSlider() {
+    intervalId = setInterval(nextAnimal, 3000); // 5000 milliseconds (5 seconds) interval
+}
+
+// Function to stop the automatic sliding
+function stopSlider() {
+    clearInterval(intervalId);
+}
+
+// Call the startSlider function to begin automatic sliding
+startSlider();
+
+// Pause the slider when the mouse is over the container
+document.querySelector(".hello").addEventListener("mouseover", stopSlider);
+
+// Resume the slider when the mouse leaves the container
+document.querySelector(".hello").addEventListener("mouseout", startSlider);
+
+
+    </script>
+</body>
+</html>

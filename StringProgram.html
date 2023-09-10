@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Programs</title>
+    <style>
+        *{
+    padding: 0;
+    margin: 0;
+    box-sizing:border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#section {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#list {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#inputText {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#output {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+    width: 800px;
+    height: 200px;
+    position: relative;
+    left: 370px;
+    font-family: monospace ;
+    font-size: x-large;
+    font-weight: bold;
+    
+}
+
+#btn1{
+            background-color: blue;
+            width: 100px;
+            height: 40px;
+            color: white;
+            border: transparent;
+            margin-top: 100px;
+            margin-left: 700px;
+        }
+    </style>
+</head>
+<body>
+    <h2>String Programs</h2>
+    <section id="section">
+        <article>
+            <label class="label"><h3>Please select a string program from the list below</h3></label>
+            <select id="list" required>
+                <option value=""></option>
+                <option value="count">Count of characters</option>
+                <option value="odd">Convert the odd character to uppercase</option>
+                <option value="ascii">Convert the even character to ASCI value</option>
+                <option value="uppercase">Convertion of lowercase to uppercase</option>
+                <option value="lowercase">Convertion of uppercase to lowercase</option>
+                <option value="reverse">String reverse</option>
+                <option value="palindrome">To check given string is palindrome or not</option>
+            </select>
+            <div></div>
+            <br>
+            <label for="inputText"><h3>Please enter a string</h3></label>
+            <input id="inputText" type="text">
+            <div></div>
+            <br>
+            <button id="btn">Submit</button>
+        </article>
+    </section>
+    <div id="output"></div>
+    <button id="btn1" onclick="goBack()">Back</button>
+    <script>
+     const btn = document.getElementById("btn");
+const output = document.getElementById("output");
+
+btn.addEventListener("click", () => {
+    const selectedProgram = document.getElementById("list").value;
+    const inputText = document.getElementById("inputText").value;
+    let result = "";
+
+    if (selectedProgram === "count") {
+        result = countCharacters(inputText);
+    } else if (selectedProgram === "odd") {
+        result = convertOddToUppercase(inputText);
+    } else if (selectedProgram === "ascii") {
+        result = convertEvenToASCII(inputText);
+    } else if (selectedProgram === "uppercase") {
+        result = convertToUppercase(inputText);
+    } else if (selectedProgram === "lowercase") {
+        result = convertToLowercase(inputText);
+    } else if (selectedProgram === "reverse") {
+        result = reverseString(inputText);
+    } else if (selectedProgram === "palindrome") {
+        result = checkPalindrome(inputText);
+    } else {
+        result = "Please select a valid option.";
+    }
+
+    output.textContent = result;
+
+    
+            var ans=result.toString();
+            var inp =new SpeechSynthesisUtterance(ans);
+            window.speechSynthesis.speak(inp);
+});
+
+
+function countCharacters(inputText) {
+    return `Entered character count is ${inputText.length}`;
+}
+
+function convertOddToUppercase(inputText) {
+    let result = "";
+    for (let i = 0; i < inputText.length; i++) {
+        if (i % 2 === 0) {
+            result += inputText[i].toUpperCase();
+        } else {
+            result += inputText[i];
+        }
+    }
+    return `The convertion of odd character to uppercase is ${result}`;
+}
+
+function convertEvenToASCII(inputText) {
+    let result = "";
+    for (let i = 0; i < inputText.length; i++) {
+        if (i % 2 === 1) {
+            result += inputText.charCodeAt(i) + " ";
+        } else {
+            result += inputText[i];
+        }
+    }
+    return `The convertion of even character to ASCII value is ${result}`;
+}
+
+function convertToLowercase(inputText) {
+    return `The convertion of uppercase to lowercase is ${inputText.toLowerCase()}`;
+}
+
+function convertToUppercase(inputText) {
+    return `The convertion lowercase to uppercase is ${inputText.toUpperCase()}`;
+}
+
+function reverseString(inputText) {
+    return `The reverse of entered string is ${inputText.split("").reverse().join("")}`;
+}
+
+function checkPalindrome(inputText) {
+    const reversedText = inputText.split("").reverse().join("");
+    if (inputText === reversedText) {
+        return " Entered string is palindrome!";
+    } else {
+        return "Entered string is not a palindrome.";
+    }
+}
+    </script>
+
+<script>
+    let btn1=document.querySelector("btn");
+     function goBack(){
+        history.back();
+     }
+</script>
+</body>
+</html>

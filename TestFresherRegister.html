@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TestFreshers Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: whitesmoke;
+            height: 60px;
+        }
+
+        .nav2 {
+            padding-right: 20px;
+            width: 170px;
+            display: flex;
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #testlogo{
+            height: 50px;
+            padding-left: 15px;
+        }
+        .button {
+            background-color: #fff;
+            border-color: #dbdbdb;
+            border-width: 1px;
+            color: #363636;
+            cursor: pointer;
+            justify-content: center;
+            padding: calc(0.5em - 1px) 1em;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .button.is-color1 {
+            background-color: #199dd3;
+            border-color: transparent;
+            color: #fff;
+            border-radius: 4px;
+            height: 25px;
+        }
+
+        .button.is-color2 {
+            background-color: #91cd67;
+            border-color: transparent;
+            color: rgba(0, 0, 0, 0.7);
+            border-radius: 4px;
+            height: 25px;
+        }
+
+        a {
+            color: #00d1b2;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .titleind {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 5px;
+        }
+
+        h1 {
+            color: #00d1b2;
+        }
+
+        #form-container {
+            background-color: white;
+            padding: 50px;
+            text-align: center;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="number"],
+        select {
+            width: 96%;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #fff;
+            border: 1px solid #dbdbdb;
+            color: #363636;
+        }
+
+        input[type="submit"] {
+            width: 100px;
+            background-color: #199dd3;
+            border: 0;
+            color: white;
+            height: 40px;
+            font-size: large;
+            cursor: pointer;
+        }
+
+        .error {
+            color: red;
+            margin: 5px 0;
+            text-align: left;
+        }
+
+        .formval1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .formval2 {
+            background-color: #fff;
+            width: 450px;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 0.5em 1em -0.125em hsla(0, 0%, 4%, 0.1),
+                0 0 0 1px hsla(0, 0%, 4%, 0.02);
+        }
+
+        .dropdown1 select {
+            width: 100%;
+            height: 40px;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #fff;
+            border: 1px solid #dbdbdb;
+            color: #363636;
+            cursor: pointer;
+        }
+
+        .dropdown1 select option[disabled] {
+            color: #999;
+        }
+
+        @media screen and (max-width: 768px) {
+            #form-container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav1">
+            <img src="./logoofcodeaffair.jpg" alt="Logo" id="testlogo">
+        </div>
+        <div class="nav2">
+            <a href="./TestFresherRegister,html" class="button is-color1">Register</a>
+            <a
+                href="./TestFresherLogin.html"
+                aria-current="page"
+                class="button is-color2 nuxt-link-exact-active nuxt-link-active"
+            >Login</a
+            >
+        </div>
+    </nav>
+    <div class="titleind">
+        <h1 class="title1">Code Affarirs Registration</h1>
+    </div>
+    <div class="formval1">
+        <form id="registrationForm" class="formval2">
+            <div>
+                <label for="username">Email</label>
+                <input type="text" id="username" name="username" />
+                <p id="userError" class="error"></p>
+            </div>
+            <div>
+                <label for="contactno">Contact Number</label>
+                <input type="number" id="contactno" name="contactno" />
+                <p id="contactError" class="error"></p>
+            </div>
+            <div>
+                <label for="organization">Organisation</label>
+                <div class="dropdown1">
+                    <select id="organization" name="organization">
+                        <option value="" disabled selected>Select Organisation</option>
+                        <option value="pyspiders">Pyspiders</option>
+                        <option value="qspiders">Qspiders</option>
+                        <option value="jspiders">Jspiders</option>
+                    </select>
+                </div>
+                <p id="organizationError" class="error"></p>
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" />
+                <p id="passError" class="error"></p>
+            </div>
+            <div>
+                <label for="confpassword">Confirm Password</label>
+                <input type="password" id="confpassword" name="confpassword" />
+                <p id="confPassError" class="error"></p>
+            </div>
+            <input type="submit" value="Register" id="btn">
+        </form>
+    </div>
+    <script>
+         document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("#registrationForm");
+            const emailInput = document.querySelector("#username");
+            const contactInput = document.querySelector("#contactno");
+            const organizationSelect = document.querySelector("#organization");
+            const passwordInput = document.querySelector("#password");
+            const confirmPasswordInput = document.querySelector("#confpassword");
+            const userError = document.querySelector("#userError");
+            const contactError = document.querySelector("#contactError");
+            const organizationError = document.querySelector("#organizationError");
+            const passError = document.querySelector("#passError");
+            const confPassError = document.querySelector("#confPassError");
+            const btn=document.querySelector("#btn");
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+                let isValid = true;
+
+                userError.textContent = "";
+                contactError.textContent = "";
+                organizationError.textContent = "";
+                passError.textContent = "";
+                confPassError.textContent = "";
+
+                if (!emailInput.value.trim()) {
+                    userError.textContent = "Email is required.";
+                    isValid = false;
+                } else if (!isValidEmail(emailInput.value)) {
+                    userError.textContent = "Invalid email format.";
+                    isValid = false;
+                }
+
+                if (!contactInput.value.trim()) {
+                    contactError.textContent = "Contact number is required.";
+                    isValid = false;
+                }
+
+                if (organizationSelect.value === "") {
+                    organizationError.textContent = "Please select an organization.";
+                    isValid = false;
+                }
+
+                if (!passwordInput.value) {
+                    passError.textContent = "Password is required.";
+                    isValid = false;
+                } else if (!hasSpecialCharacters(passwordInput.value)) {
+                    passError.textContent = "Password must contain special characters.";
+                    isValid = false;
+                }
+
+                if (!confirmPasswordInput.value) {
+                    confPassError.textContent = "Confirm Password is required.";
+                    isValid = false;
+                } else if (passwordInput.value !== confirmPasswordInput.value) {
+                    confPassError.textContent = "Passwords do not match.";
+                    isValid = false;
+                }
+
+            if (isValid) {
+                const userData = {
+                contactnum: contactInput.value,
+                email: emailInput.value,
+                password: passwordInput.value,
+                organization: organizationSelect.value,
+            };
+
+            addUserToLocalStorage(userData);
+            form.reset();
+                 }
+        });
+   
+
+              
+        function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            function hasSpecialCharacters(text) {
+                const specialCharactersRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                return specialCharactersRegex.test(text);
+            }
+
+            function addUserToLocalStorage(userData) {
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+        users.push(userData);
+        localStorage.setItem("users", JSON.stringify(users));
+    }
+    });
+      
+        
+    </script>
+</body>
+</html>

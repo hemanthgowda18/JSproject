@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TestFreshers Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: whitesmoke;
+            height: 65px;
+        }
+
+        #testlogo {
+            height: 50px;
+            padding-left: 15px;
+        }
+
+       
+        .button.is-color2 {
+            background-color: #91cd67;
+            border-color: transparent;
+            color: #fff;
+            border-radius: 4px;
+            height: 40px;
+        }
+
+        .button.is-color1{
+            background-color: #199dd3;
+            border-color: transparent;
+            color: #fff;
+            border-radius: 4px;
+            height: 40px;
+        }
+
+        .button {
+            background-color: #fff;
+            border-color: #dbdbdb;
+            border-width: 1px;
+            color: #363636;
+            cursor: pointer;
+            justify-content: center;
+            padding: calc(0.5em - 1px) 1em;
+            text-align: center;
+            white-space: nowrap;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: #00d1b2;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .titleind {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 5px;
+        }
+
+        h1 {
+            color: #00d1b2;
+        }
+
+        .formval1 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 20px;
+            overflow: auto;
+            padding: 20px;
+        }
+
+        .formval2 {
+            background-color: #fff;
+            width: 450px;
+            height: 300px;
+            padding: 30px;
+            border-radius: 6px;
+            box-shadow: 0 0.5em 1em -0.125em hsla(0, 0%, 4%, 0.1),
+                        0 0 0 1px hsla(0, 0%, 4%, 0.02);
+        }
+
+        input {
+            width: 420px;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #fff;
+            border: 1px solid #dbdbdb;
+            color: #363636;
+        }
+
+        input[type="submit"] {
+            width: 100px;
+            background-color: #199dd3;
+            border: 0;
+            color: white;
+            height: 40px;
+            font-size: large;
+        }
+
+        .error {
+            color: red;
+            margin: 0;
+            text-align: left;
+        }
+
+        .res2 {
+            margin-top: 8px;
+            color: #00d1b2;
+        }
+
+        .res1 {
+            color: #00d1b2;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav1">
+            <img src="./logoofcodeaffair.jpg" alt="Logo" id="testlogo">
+        </div>
+        <div class="nav2">
+            <a href="./TestFresherRegister.html" class="button is-color1">Register</a>
+            <a href="./TestFresherLogin.html" aria-current="page" class="button is-color2 nuxt-link-exact-active nuxt-link-active">Login</a>
+        </div>
+    </nav>
+    <div class="titleind">
+        <h1 class="title1">Code Affairs Login</h1>
+    </div>
+    <div class="formval1">
+        <form id="loginForm" class="formval2" action="">
+            <div>
+                <label for="username">Email</label>
+                <input type="text" id="username">
+                <p id="userError" class="error"></p>
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="password">
+                <p id="passError" class="error"></p>
+            </div>
+            <input type="submit" value="Login">
+            <div class="res1">
+            <p>Reset Password using Mail?</p>
+        </div>
+        <div class="res2">
+            <p>Reset Password using Number?</p>
+        </div>
+        </form>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("#loginForm");
+            const emailInput = document.querySelector("#username");
+            const passwordInput = document.querySelector("#password");
+            const userError = document.querySelector("#userError");
+            const passError = document.querySelector("#passError");
+
+            form.addEventListener("submit", function (event) {
+                let isValid = true;
+
+                const emailValue = emailInput.value.trim();
+                if (!isValidEmail(emailValue)) {
+                    userError.textContent = "Please enter a valid email address";
+                    isValid = false;
+                } else {
+                    userError.textContent = "";
+                }
+
+                if (passwordInput.value.trim() === "") {
+                    passError.textContent = "Password is required";
+                    isValid = false;
+                } else {
+                    passError.textContent = "";
+                }
+
+                if (isValid) {
+                    const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+                    const matchedUser = storedUsers.find(user => user.email === emailValue && user.password === passwordInput.value);
+
+                    if (matchedUser) {
+                        form.action = "index.html"; 
+                    } else {
+                        userError.textContent = "Invalid email or password";
+                        event.preventDefault();
+                    }
+                } else {
+                    event.preventDefault();
+                }
+            });
+
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+        });
+    </script>
+</body>
+</html>
